@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="cn" dir="ltr">
+	<head>
+		<title>Pratice</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!--icon-->
+		<link href="https://cdn.lineicons.com/3.0/lineicons.css" rel="stylesheet">
+		<!--Css-->
+		<link rel="stylesheet" type="text/css" href="styles.css">
+		<!--jquery-->
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="index.js"></script>  
+	</head>
+	<body>
+		<div class="banana 123"></div>
+		<div id="controls"></div>
+		<div id="two" class="example hide odd" ></div>
+		<div id="three" class="example hide even" ></div>
+		<div id="four" class="example hide odd" ></div>
+		<div id="five" class="example hide even" ></div>
+	</body>
+	<script>
+	function update() {
+		const container = document.getElementById("controls");
+		const elem = document.querySelector('div');
+		const rect = elem.getBoundingClientRect();
+		container.innerHTML = '';
+		for (let key in rect) {
+			if(typeof rect[key] !== 'function') {
+				let para = document.createElement('p');
+				para.textContent  = `${ key } : ${ rect[key] }`;
+				container.appendChild(para);
+			}
+		}
+		// $('.fadethisdiv').css('visibility', 'visible').hide().fadeIn();
+		if (rect.y <= -50) {
+			$(".example").removeClass("hide");
+			$(".example").addClass("show");
+			$("#three").removeClass("even");
+			$("#five").removeClass("even");
+		} if (rect.y === 50) {
+			$(".example").removeClass("show");
+			$(".example").addClass("hide");
+			$("#three").addClass("even");
+			$("#five").addClass("even");
+		}
+	}
+	document.addEventListener('scroll', update);
+	update();
+	</script>
+</html>
